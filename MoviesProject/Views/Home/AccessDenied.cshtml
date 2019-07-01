@@ -1,0 +1,15 @@
+﻿@using MoviesProject.Resources
+@{
+    ViewBag.Title = "Yetkisiz Erişim";
+}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1><span class="glyphicon glyphicon-remove-circle"></span> @lang.accessdenied</h1>
+        <p>
+            @lang.auth
+            <br /><br />
+            <a href="/Home/Index" class="btn btn-primary"><span class="glyphicon glyphicon-home"> @lang.backtohomepage</span></a>
+
+        </p>
+    </div>
+</div>

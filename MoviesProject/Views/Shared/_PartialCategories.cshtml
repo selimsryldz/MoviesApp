@@ -1,0 +1,97 @@
+﻿@using MoviesProject.Database
+@using MoviesProject.Resources
+@using MoviesProject.Models
+<link href="~/Content/animate.css" rel="stylesheet" />
+
+<!-- Icomoon -->
+<link href="~/Content/icomoon.css" rel="stylesheet" />
+
+<!-- Bootstrap  -->
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="~/Content/style.css" rel="stylesheet" />
+
+
+<!-- Modernizr JS -->
+<script src="~/Scripts/modernizr-2.6.2.min.js"></script>
+<div id="fh5co-offcanvas">
+    <a href="#" class="fh5co-close-offcanvas js-fh5co-close-offcanvas">
+        <span>
+            <img width="18" height="18" src="~/images/remove.png" /> <span>Close</span>
+        </span>
+    </a>
+    <div class="fh5co-bio">
+
+        <h3 class="heading">@lang.about</h3>
+        
+        <p>@lang.aboutdesc </p>
+        <h3 class="heading">Panel</h3>
+
+
+        @{
+            var db = new MovieDBEntities1();
+            var list = db.Categories.ToList();
+        }
+
+
+        @{
+            if (CurrentSession.User == null)
+            {
+                <a href="/Home/Login" class="btn btn-lg btn-success ">@lang.login</a>
+                <a href="/Home/Register" class="btn btn-lg btn-warning">@lang.register</a>
+            }
+            if (CurrentSession.User != null && CurrentSession.User.IsAdmin == true)
+            {
+                <p> @lang.managementpanel</p>
+
+                <a class="dropdown-item btn btn-lg btn-success" href="/Home/UserPanel">@lang.userpanel</a>
+                <a class="dropdown-item btn btn-lg btn-warning" href="/Home/MoviePanel">@lang.moviepanel</a>
+
+
+                <a href="/Home/Logout" class="btn btn-lg btn-danger ">@lang.logout</a>
+            }
+            if (CurrentSession.User != null && CurrentSession.User.IsAdmin == false)
+            {
+
+
+                <a href="/Home/Logout" class="btn btn-lg btn-danger ">@lang.logout</a>
+            }
+                <p>
+                    @Html.ActionLink("Turkish", "ChangeLang", "Home", new { LanguageAbbrevation = "tr" }, null)
+                    @Html.ActionLink("English", "ChangeLang", "Home", new { LanguageAbbrevation = "en" }, null)
+                </p> 
+
+
+        }
+
+    </div>
+    <div class="fh5co-menu">
+        <div class="fh5co-box">
+            <h3 class="heading">@lang.categories</h3>
+            <ul>
+                @foreach (Categories cat in list)
+                {
+                    <li><a href="/Home/Category/@cat.Id">@cat.Title</a></li>
+                }
+
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!-- jQuery -->
+
+<script src="~/Scripts/jquery.min.js"></script>
+
+<!-- jQuery Easing -->
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+
+<!-- Bootstrap -->
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<!-- Waypoints -->
+<script src="~/Scripts/jquery.waypoints.min.js"></script>
+
+<!-- Main JS -->
+<script src="~/Scripts/main.js"></script>
